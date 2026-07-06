@@ -1,0 +1,26 @@
+[
+  {
+    "departure_date": "2026-08-03",
+    "return_date": null,
+    "baseline_price": 231,
+    "baseline_recorded_at": "2026-07-06T12:04:51.036Z"
+  },
+  {
+    "departure_date": "2026-08-04",
+    "return_date": null,
+    "baseline_price": 163,
+    "baseline_recorded_at": "2026-07-06T12:04:51.036Z"
+  },
+  {
+    "departure_date": "2026-08-05",
+    "return_date": null,
+    "baseline_price": 103,
+    "baseline_recorded_at": "2026-07-06T12:04:51.036Z"
+  },
+  {
+    "departure_date": "2026-08-06",
+    "return_date": null,
+    "baseline_price": 131,
+    "baseline_recorded_at": "2026-07-06T12:04:51.036Z"
+  }
+]

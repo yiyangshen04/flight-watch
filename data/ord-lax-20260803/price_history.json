@@ -1,0 +1,122 @@
+{
+  "created_at": "2026-07-06T12:04:53.302Z",
+  "watch_id": "ord-lax-20260803",
+  "label": "测试：单程芝加哥-洛杉矶",
+  "route": "ORD -> LAX (one way)",
+  "currency": "USD",
+  "series_by_departure_date": {
+    "2026-08-03": {
+      "departure_date": "2026-08-03",
+      "return_date": null,
+      "points": [
+        {
+          "run_started_at": "2026-07-06T12:04:51.036Z",
+          "price_min": 231,
+          "status": "ok",
+          "prices_found": 50,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-08-04": {
+      "departure_date": "2026-08-04",
+      "return_date": null,
+      "points": [
+        {
+          "run_started_at": "2026-07-06T12:04:51.036Z",
+          "price_min": 163,
+          "status": "ok",
+          "prices_found": 50,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-08-05": {
+      "departure_date": "2026-08-05",
+      "return_date": null,
+      "points": [
+        {
+          "run_started_at": "2026-07-06T12:04:51.036Z",
+          "price_min": 103,
+          "status": "ok",
+          "prices_found": 50,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-08-06": {
+      "departure_date": "2026-08-06",
+      "return_date": null,
+      "points": [
+        {
+          "run_started_at": "2026-07-06T12:04:51.036Z",
+          "price_min": 131,
+          "status": "ok",
+          "prices_found": 50,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "run_started_at": "2026-07-06T12:04:51.036Z",
+      "summary": {
+        "run_started_at": "2026-07-06T12:04:51.036Z",
+        "watch_id": "ord-lax-20260803",
+        "label": "测试：单程芝加哥-洛杉矶",
+        "route": "ORD -> LAX (one way)",
+        "trip_type": "one_way",
+        "currency": "USD",
+        "adults": 1,
+        "seat": "economy",
+        "departure_start": "2026-08-03",
+        "departure_end": "2026-08-06",
+        "trip_length_days": null,
+        "rows_total": 4,
+        "rows_with_price": 4,
+        "min": 103,
+        "median": 147,
+        "mean": 157,
+        "max": 231,
+        "target_row": null,
+        "cheapest_5_dates": [
+          {
+            "departure_date": "2026-08-05",
+            "return_date": null,
+            "price_min": 103
+          },
+          {
+            "departure_date": "2026-08-06",
+            "return_date": null,
+            "price_min": 131
+          },
+          {
+            "departure_date": "2026-08-04",
+            "return_date": null,
+            "price_min": 163
+          },
+          {
+            "departure_date": "2026-08-03",
+            "return_date": null,
+            "price_min": 231
+          }
+        ],
+        "notes": []
+      },
+      "rows_count": 4
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+departure_date,return_date,currency,baseline_price,previous_price,price_min,delta_vs_last_round,delta_vs_first_round,prices_found,status
+2026-08-03,,USD,,,231,,,50,ok
+2026-08-04,,USD,,,163,,,50,ok
+2026-08-05,,USD,,,103,,,50,ok
+2026-08-06,,USD,,,131,,,50,ok

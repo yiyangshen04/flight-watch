@@ -8,8 +8,14 @@
       "enabled": true,
       "label": "Chicago -> Rome, Paris -> Chicago",
       "trip_type": "round_trip",
-      "outbound": { "from": "CHI", "to": "ROM" },
-      "return": { "from": "PAR", "to": "CHI" },
+      "outbound": {
+        "from": "CHI",
+        "to": "ROM"
+      },
+      "return": {
+        "from": "PAR",
+        "to": "CHI"
+      },
       "departure_start": "2026-09-01",
       "departure_end": "2026-09-14",
       "trip_length_days": 16,
@@ -23,11 +29,28 @@
       "enabled": false,
       "label": "示例：单程 Chicago -> Paris",
       "trip_type": "one_way",
-      "outbound": { "from": "CHI", "to": "PAR" },
+      "outbound": {
+        "from": "CHI",
+        "to": "PAR"
+      },
       "departure_start": "2026-10-01",
       "departure_end": "2026-10-07",
       "currency": "USD",
       "max_stops": 0
+    },
+    {
+      "id": "ord-lax-20260803",
+      "enabled": true,
+      "trip_type": "one_way",
+      "outbound": {
+        "from": "ORD",
+        "to": "LAX"
+      },
+      "departure_start": "2026-08-03",
+      "departure_end": "2026-08-06",
+      "currency": "USD",
+      "max_stops": 0,
+      "label": "测试：单程芝加哥-洛杉矶"
     }
   ]
 }
