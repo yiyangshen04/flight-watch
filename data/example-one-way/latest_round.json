@@ -1,14 +1,14 @@
 {
-  "run_started_at": "2026-07-06T10:24:40.254Z",
+  "run_started_at": "2026-07-06T11:26:08.425Z",
   "rows": [
     {
       "departure_date": "2026-10-01",
       "return_date": null,
-      "baseline_price": null,
-      "previous_price": null,
+      "baseline_price": 519,
+      "previous_price": 519,
       "price_min": 519,
-      "delta_vs_last_round": null,
-      "delta_vs_first_round": null,
+      "delta_vs_last_round": 0,
+      "delta_vs_first_round": 0,
       "prices_found": 6,
       "status": "ok",
       "debug": {
@@ -26,11 +26,11 @@
     {
       "departure_date": "2026-10-02",
       "return_date": null,
-      "baseline_price": null,
-      "previous_price": null,
+      "baseline_price": 519,
+      "previous_price": 519,
       "price_min": 519,
-      "delta_vs_last_round": null,
-      "delta_vs_first_round": null,
+      "delta_vs_last_round": 0,
+      "delta_vs_first_round": 0,
       "prices_found": 6,
       "status": "ok",
       "debug": {
@@ -48,11 +48,11 @@
     {
       "departure_date": "2026-10-03",
       "return_date": null,
-      "baseline_price": null,
-      "previous_price": null,
+      "baseline_price": 519,
+      "previous_price": 519,
       "price_min": 519,
-      "delta_vs_last_round": null,
-      "delta_vs_first_round": null,
+      "delta_vs_last_round": 0,
+      "delta_vs_first_round": 0,
       "prices_found": 6,
       "status": "ok",
       "debug": {
@@ -70,11 +70,11 @@
     {
       "departure_date": "2026-10-04",
       "return_date": null,
-      "baseline_price": null,
-      "previous_price": null,
+      "baseline_price": 355,
+      "previous_price": 355,
       "price_min": 355,
-      "delta_vs_last_round": null,
-      "delta_vs_first_round": null,
+      "delta_vs_last_round": 0,
+      "delta_vs_first_round": 0,
       "prices_found": 6,
       "status": "ok",
       "debug": {
@@ -92,11 +92,11 @@
     {
       "departure_date": "2026-10-05",
       "return_date": null,
-      "baseline_price": null,
-      "previous_price": null,
+      "baseline_price": 355,
+      "previous_price": 355,
       "price_min": 355,
-      "delta_vs_last_round": null,
-      "delta_vs_first_round": null,
+      "delta_vs_last_round": 0,
+      "delta_vs_first_round": 0,
       "prices_found": 6,
       "status": "ok",
       "debug": {
@@ -114,11 +114,11 @@
     {
       "departure_date": "2026-10-06",
       "return_date": null,
-      "baseline_price": null,
-      "previous_price": null,
+      "baseline_price": 355,
+      "previous_price": 355,
       "price_min": 355,
-      "delta_vs_last_round": null,
-      "delta_vs_first_round": null,
+      "delta_vs_last_round": 0,
+      "delta_vs_first_round": 0,
       "prices_found": 6,
       "status": "ok",
       "debug": {
@@ -136,11 +136,11 @@
     {
       "departure_date": "2026-10-07",
       "return_date": null,
-      "baseline_price": null,
-      "previous_price": null,
+      "baseline_price": 355,
+      "previous_price": 355,
       "price_min": 355,
-      "delta_vs_last_round": null,
-      "delta_vs_first_round": null,
+      "delta_vs_last_round": 0,
+      "delta_vs_first_round": 0,
       "prices_found": 6,
       "status": "ok",
       "debug": {
@@ -157,7 +157,7 @@
     }
   ],
   "summary": {
-    "run_started_at": "2026-07-06T10:24:40.254Z",
+    "run_started_at": "2026-07-06T11:26:08.425Z",
     "watch_id": "example-one-way",
     "label": "示例：单程 Chicago -> Paris",
     "route": "CHI -> PAR (one way)",

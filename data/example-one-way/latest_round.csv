@@ -1,8 +1,8 @@
 departure_date,return_date,currency,baseline_price,previous_price,price_min,delta_vs_last_round,delta_vs_first_round,prices_found,status
-2026-10-01,,USD,,,519,,,6,ok
-2026-10-02,,USD,,,519,,,6,ok
-2026-10-03,,USD,,,519,,,6,ok
-2026-10-04,,USD,,,355,,,6,ok
-2026-10-05,,USD,,,355,,,6,ok
-2026-10-06,,USD,,,355,,,6,ok
-2026-10-07,,USD,,,355,,,6,ok
+2026-10-01,,USD,519,519,519,0,0,6,ok
+2026-10-02,,USD,519,519,519,0,0,6,ok
+2026-10-03,,USD,519,519,519,0,0,6,ok
+2026-10-04,,USD,355,355,355,0,0,6,ok
+2026-10-05,,USD,355,355,355,0,0,6,ok
+2026-10-06,,USD,355,355,355,0,0,6,ok
+2026-10-07,,USD,355,355,355,0,0,6,ok

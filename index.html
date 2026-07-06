@@ -5,101 +5,419 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>机票价格监控</title>
   <style>
-    :root { --card:#fff; --ink:#1c2430; --muted:#66758a; --accent:#1f7a8c; }
-    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: linear-gradient(160deg,#eef3f8,#f9fbfd 45%,#edf6f3); color: var(--ink); min-height:100vh; }
-    .wrap { max-width: 980px; margin: 32px auto; padding: 0 16px 40px; }
-    h1 { font-size: 26px; margin: 0 0 4px; }
-    .sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
-    .card { background: var(--card); border-radius: 16px; box-shadow: 0 12px 28px rgba(19,35,58,.08); border: 1px solid #e7edf4; padding: 18px 20px; margin-bottom: 18px; }
-    .card h2 { margin: 0; font-size: 18px; }
-    .route { color: var(--muted); font-size: 13px; margin: 4px 0 12px; }
-    .badge { display:inline-block; font-size:11px; padding:2px 8px; border-radius:99px; background:#eef6f8; color:var(--accent); border:1px solid #d5e8ec; margin-left:8px; vertical-align:2px; }
-    .badge.off { background:#f4f4f5; color:#8a8f98; border-color:#e4e4e7; }
-    .stats { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
-    .stat { background:#f8fbff; border:1px solid #e3ebf6; border-radius:10px; padding:8px 14px; min-width:110px; }
-    .stat .k { font-size:11px; color:var(--muted); }
-    .stat .v { font-size:18px; font-weight:700; margin-top:2px; }
-    .cheap { font-size: 13px; color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
-    .cheap b { color: var(--ink); }
-    a.btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-size:14px; padding:8px 16px; border-radius:10px; }
-    a.btn:hover { filter: brightness(1.08); }
-    .err { color:#a33; font-size:13px; }
-    .foot { color:var(--muted); font-size:12px; margin-top:24px; line-height:1.6; }
-    .foot code { background:#eef2f7; padding:1px 6px; border-radius:6px; }
+    :root {
+      --ink:#1c2430; --muted:#66758a; --card:#fff; --line:#e7edf4;
+      --accent:#1f7a8c; --good:#1e8f5e; --bad:#c0392b; --sel:#8e6bb0; --target:#c08a2d;
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: linear-gradient(160deg,#eef3f8,#f9fbfd 45%,#edf6f3); color: var(--ink); min-height:100vh; }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 26px 16px 48px; }
+    header h1 { font-size: 25px; margin: 0; }
+    header .sub { color: var(--muted); font-size: 13px; margin-top: 5px; }
+
+    .tabs { display:flex; gap:8px; flex-wrap:wrap; margin: 18px 0 14px; }
+    .tab { border:1px solid var(--line); background:#fffdfa; border-radius: 99px; padding: 7px 16px; font-size: 13.5px; cursor:pointer; color: var(--muted); }
+    .tab:hover { border-color:#c9d8e6; }
+    .tab.active { background: var(--accent); border-color: var(--accent); color:#fff; font-weight:600; }
+    .tab .off { opacity:.7; font-size:11px; }
+
+    .card { background: var(--card); border-radius: 16px; box-shadow: 0 12px 28px rgba(19,35,58,.07); border: 1px solid var(--line); padding: 16px 18px; margin-bottom: 16px; }
+    .card h2 { font-size: 16px; margin: 0 0 2px; }
+    .card .hint { color: var(--muted); font-size: 12.5px; margin: 2px 0 10px; line-height:1.5; }
+
+    .summary { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:10px; }
+    .stat { background:#f8fbff; border:1px solid #e3ebf6; border-radius: 12px; padding: 10px 14px; }
+    .stat .k { font-size: 11.5px; color: var(--muted); }
+    .stat .v { font-size: 20px; font-weight: 750; margin-top: 3px; }
+    .stat .d { font-size: 12px; margin-top:2px; color: var(--muted); }
+    .down { color: var(--good); } .up { color: var(--bad); }
+
+    svg { width:100%; height:auto; display:block; }
+    .bar { cursor:pointer; }
+    .clickhint { font-size:12px; color:var(--muted); margin-top:6px; }
+
+    .legend { display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin-bottom:4px; }
+    .legend .sw { display:inline-block; width:16px; height:4px; border-radius:2px; margin-right:6px; vertical-align:middle; }
+
+    .tablewrap { overflow-x:auto; }
+    table { border-collapse: collapse; width:100%; font-size: 13.5px; min-width: 620px; }
+    th, td { text-align: right; padding: 7px 10px; border-bottom: 1px solid #eef2f7; white-space:nowrap; }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+    th:first-child, td:first-child { text-align: left; }
+    tr.selrow { background:#f6f1fb; }
+    tbody tr { cursor:pointer; }
+    tbody tr:hover { background:#f4f8fc; }
+    .sortbtns { float:right; }
+    .sortbtns button { border:1px solid var(--line); background:#fff; border-radius:8px; padding:4px 10px; font-size:12px; cursor:pointer; color:var(--muted); }
+    .sortbtns button.on { background:#eef6f8; color:var(--accent); border-color:#cfe3e8; }
+
+    .tooltip { position: fixed; pointer-events:none; z-index:99; max-width:320px; background:#101827; color:#edf4ff; border-radius:10px; box-shadow:0 12px 26px rgba(0,0,0,.35); padding:9px 12px; font-size:12.5px; line-height:1.55; opacity:0; transition:opacity .1s; }
+    .tooltip.show { opacity:1; }
+    .tooltip b { font-size:13.5px; }
+    .muted2 { color:#b8c7dd; }
+    .empty { color: var(--muted); font-size: 14px; padding: 24px 0; text-align:center; line-height:1.8; }
+    .foot { color:var(--muted); font-size:12px; margin-top:20px; line-height:1.7; }
+    .foot code { background:#eaeff5; padding:1px 6px; border-radius:6px; }
+    a { color: var(--accent); }
   </style>
 </head>
 <body>
-  <div class="wrap">
+<div class="wrap">
+  <header>
     <h1>✈️ 机票价格监控</h1>
-    <div class="sub" id="updated">加载中…</div>
-    <div id="watches"></div>
-    <div class="foot">
-      数据在本地运行 <code>node flight_watch_once.mjs</code> 并 <code>git push</code> 后更新。
-      每个卡片的走势图里可以查看各出发日期的完整价格历史。
-    </div>
+    <div class="sub" id="subline">加载中…</div>
+  </header>
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
+  <div class="foot">
+    更新数据：本地运行 <code>node flight_watch_once.mjs</code> 后 <code>git push</code>。
+    终端看统计：<code>node flight_watch_stats.mjs</code>。
+    新增航线/单程/改日期：编辑 <code>flight_watch_config.json</code>（详见 <a href="https://github.com/yiyangshen04/flight-watch#readme">README</a>）。
   </div>
+</div>
+<div class="tooltip" id="tip"></div>
 
-  <script>
-    const fmtMoney = (v, cur) => v == null ? 'n/a' : ({USD:'$',EUR:'€',GBP:'£',JPY:'¥',CNY:'¥'}[cur] ?? cur + ' ') + v;
-    const fmtTime = (iso) => iso ? new Date(iso).toLocaleString('zh-CN', { hour12: false }) : 'n/a';
+<script>
+'use strict';
+const SYM = { USD:'$', EUR:'€', GBP:'£', JPY:'¥', CNY:'¥', HKD:'HK$', KRW:'₩', AUD:'A$', CAD:'C$' };
+const state = { config:null, histories:{}, watchId:null, selDate:{}, sort:'date' };
+const tip = document.getElementById('tip');
 
-    async function getJson(url) {
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error(res.status);
-      return res.json();
+const money = (v,cur) => v==null ? '—' : (SYM[cur] ?? cur+' ') + Math.round(v).toLocaleString();
+const fmtRun = (iso, withDate=true) => {
+  const d = new Date(iso);
+  const t = d.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',hour12:false});
+  return withDate ? (d.getMonth()+1)+'/'+d.getDate()+' '+t : t;
+};
+const fmtFull = (iso) => iso ? new Date(iso).toLocaleString('zh-CN',{hour12:false}) : '—';
+const deltaHtml = (v,cur) => {
+  if (v==null) return '<span class="muted2">—</span>';
+  if (v===0) return '<span style="color:var(--muted)">持平</span>';
+  return v<0 ? `<span class="down">▼ ${money(-v,cur)}</span>` : `<span class="up">▲ ${money(v,cur)}</span>`;
+};
+
+function showTip(html, ev) {
+  tip.innerHTML = html;
+  tip.style.left = Math.min(window.innerWidth-340, ev.clientX+14)+'px';
+  tip.style.top  = Math.min(window.innerHeight-190, ev.clientY+14)+'px';
+  tip.classList.add('show');
+}
+const hideTip = () => tip.classList.remove('show');
+
+async function getJson(url) {
+  const r = await fetch(url, {cache:'no-store'});
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+// —— 数据整形：把 history 变成 {dates[], runs[], grid: date->run->point, latest: date->point} ——
+function shape(history) {
+  const runs = history.runs.map(r => r.run_started_at);
+  const series = Object.values(history.series_by_departure_date)
+    .sort((a,b)=>a.departure_date.localeCompare(b.departure_date));
+  const grid = {};
+  const latest = {};
+  for (const s of series) {
+    grid[s.departure_date] = new Map(s.points.map(p=>[p.run_started_at,p]));
+    latest[s.departure_date] = s.points[s.points.length-1] ?? null;
+  }
+  const runMin = runs.map(iso => {
+    const vals = series.map(s=>grid[s.departure_date].get(iso)?.price_min).filter(Number.isFinite);
+    return vals.length ? Math.min(...vals) : null;
+  });
+  return { runs, series, grid, latest, runMin };
+}
+
+// ———————— 图1：哪天出发更便宜（柱状图） ————————
+function barChart(watch, d) {
+  const NS='http://www.w3.org/2000/svg';
+  const W=960,H=300,L=56,R=14,T=20,B=46, pw=W-L-R, ph=H-T-B;
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const cur = watch.currency ?? 'USD';
+  const items = d.series.map(s => ({ date:s.departure_date, ret:s.return_date, p:d.latest[s.date ?? s.departure_date]?.price_min ?? d.latest[s.departure_date]?.price_min ?? null, pt:d.latest[s.departure_date] }));
+  const priced = items.filter(i=>Number.isFinite(i.p));
+  if (!priced.length) return null;
+  const maxV = Math.max(...priced.map(i=>i.p));
+  const minV = Math.min(...priced.map(i=>i.p));
+  const y = v => T + (1 - v/(maxV*1.08)) * ph;
+  const bw = pw/items.length;
+  const cheapSet = new Set([...priced].sort((a,b)=>a.p-b.p).slice(0,3).map(i=>i.date));
+
+  const mk=(t,at)=>{const e=document.createElementNS(NS,t);for(const k in at)e.setAttribute(k,at[k]);return e;};
+  // 网格与Y轴
+  for (let i=0;i<=4;i++){
+    const v = maxV*1.08*(1-i/4)* (i===4?0:1) || 0;
+    const yy = T+ph*i/4;
+    svg.appendChild(mk('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#e6ebf2','stroke-width':1}));
+    const tx=mk('text',{x:L-8,y:yy+4,'text-anchor':'end','font-size':11,fill:'#6a7789'});
+    tx.textContent=money(Math.round(maxV*1.08*(1-i/4)),cur); svg.appendChild(tx);
+  }
+  // 最低价虚线
+  svg.appendChild(mk('line',{x1:L,x2:W-R,y1:y(minV),y2:y(minV),stroke:'#1e8f5e','stroke-dasharray':'4 4','stroke-width':1,opacity:.6}));
+
+  const selDate = state.selDate[watch.id];
+  items.forEach((it,i)=>{
+    const x = L + i*bw + bw*0.14, w = bw*0.72;
+    const cx = L + i*bw + bw/2;
+    if (Number.isFinite(it.p)) {
+      const isCheap = cheapSet.has(it.date);
+      const isSel = it.date === selDate;
+      const rect = mk('rect',{x, y:y(it.p), width:w, height:T+ph-y(it.p), rx:5,
+        fill: isCheap ? '#2e9e6b' : '#7fb0c4', opacity: isSel?1:.88,
+        stroke: isSel ? '#5a3d78' : 'none','stroke-width':2.5, class:'bar'});
+      rect.addEventListener('click',()=>{ state.selDate[watch.id]=it.date; renderView(); });
+      rect.addEventListener('mousemove',ev=>showTip(
+        `<b>${it.date}</b>${it.ret?' ~ '+it.ret:''}<br/>最新价格：<b>${money(it.p,cur)}</b><br/>`+
+        `较上一轮：${deltaHtml(it.pt?.delta_vs_last_round,cur)}　较首次：${deltaHtml(it.pt?.delta_vs_first_round,cur)}`+
+        `<br/><span class="muted2">点击柱子，在下方查看这一天的价格走势</span>`,ev));
+      rect.addEventListener('mouseleave',hideTip);
+      svg.appendChild(rect);
+      // 价格标签
+      const lb=mk('text',{x:cx,y:y(it.p)-5,'text-anchor':'middle','font-size':10.5,fill:isCheap?'#1e8f5e':'#5d7183','font-weight':isCheap?700:400});
+      lb.textContent=Math.round(it.p).toLocaleString(); svg.appendChild(lb);
+    } else {
+      const tx=mk('text',{x:cx,y:T+ph-4,'text-anchor':'middle','font-size':11,fill:'#b6c0cc'});
+      tx.textContent='×'; svg.appendChild(tx);
     }
-
-    async function main() {
-      const box = document.getElementById('watches');
-      let config;
-      try {
-        config = await getJson('flight_watch_config.json');
-      } catch (e) {
-        document.getElementById('updated').textContent = '读取配置失败：' + e.message;
-        return;
-      }
-
-      let newest = null;
-      for (const w of config.watches) {
-        const card = document.createElement('div');
-        card.className = 'card';
-        let latest = null;
-        try { latest = await getJson('data/' + w.id + '/latest_round.json'); } catch {}
-        const s = latest?.summary;
-        if (s?.run_started_at && (!newest || s.run_started_at > newest)) newest = s.run_started_at;
-
-        const routeBits = [];
-        routeBits.push((w.outbound?.from ?? '?') + ' → ' + (w.outbound?.to ?? '?'));
-        if (w.trip_type !== 'one_way') {
-          const rf = w.return?.from ?? w.outbound?.to, rt = w.return?.to ?? w.outbound?.from;
-          routeBits.push(rf + ' → ' + rt);
-        }
-        const cheap = (s?.cheapest_5_dates ?? []).map((d) =>
-          '<b>' + fmtMoney(d.price_min, s.currency) + '</b>（' + d.departure_date + (d.return_date ? ' ~ ' + d.return_date : '') + '）'
-        ).join('、 ');
-
-        card.innerHTML =
-          '<h2>' + (w.label ?? w.id) +
-            '<span class="badge' + (w.enabled === false ? ' off' : '') + '">' + (w.enabled === false ? '已停用' : (w.trip_type === 'one_way' ? '单程' : '往返')) + '</span></h2>' +
-          '<div class="route">' + routeBits.join('，回程 ') + ' ｜ 出发窗口 ' + w.departure_start + ' ~ ' + w.departure_end +
-            (w.trip_length_days ? '，行程 ' + w.trip_length_days + ' 天' : '') + '</div>' +
-          (s ? (
-            '<div class="stats">' +
-              '<div class="stat"><div class="k">当前最低</div><div class="v">' + fmtMoney(s.min, s.currency) + '</div></div>' +
-              '<div class="stat"><div class="k">中位数</div><div class="v">' + fmtMoney(s.median, s.currency) + '</div></div>' +
-              '<div class="stat"><div class="k">有价日期</div><div class="v">' + s.rows_with_price + '/' + s.rows_total + '</div></div>' +
-              '<div class="stat"><div class="k">最近抓取</div><div class="v" style="font-size:13px">' + fmtTime(s.run_started_at) + '</div></div>' +
-            '</div>' +
-            (cheap ? '<div class="cheap">最便宜：' + cheap + '</div>' : '') +
-            '<a class="btn" href="data/' + w.id + '/overlay_chart.html">查看价格走势图 →</a>'
-          ) : '<div class="err">还没有抓取数据（本地运行一次 flight_watch_once.mjs 后 push 即可）</div>');
-        box.appendChild(card);
-      }
-      document.getElementById('updated').textContent = newest
-        ? '最近一次抓取：' + fmtTime(newest)
-        : '暂无抓取数据';
+    if (watch.target_departure_date === it.date) {
+      const st=mk('text',{x:cx,y:T-6,'text-anchor':'middle','font-size':12,fill:'var(--target)'});
+      st.textContent='★'; svg.appendChild(st);
     }
-    main();
-  </script>
+    // X轴标签
+    const step = Math.ceil(items.length/16);
+    if (i%step===0){
+      const dx=mk('text',{x:cx,y:T+ph+16,'text-anchor':'middle','font-size':10.5,fill:'#6a7789'});
+      dx.textContent=it.date.slice(5); svg.appendChild(dx);
+    }
+  });
+  return svg;
+}
+
+// ———————— 图2：不同抓取时间的价格对比（折线图） ————————
+function lineChart(watch, d) {
+  const NS='http://www.w3.org/2000/svg';
+  const W=960,H=300,L=56,R=14,T=16,B=52, pw=W-L-R, ph=H-T-B;
+  const cur = watch.currency ?? 'USD';
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  const mk=(t,at)=>{const e=document.createElementNS(NS,t);for(const k in at)e.setAttribute(k,at[k]);return e;};
+
+  const selDate = state.selDate[watch.id];
+  const lines = [
+    { name:'全场最低（所有日期中最便宜的）', color:'#1f7a8c', width:2.6, vals: d.runMin, dash:null },
+  ];
+  if (selDate && d.grid[selDate]) {
+    lines.push({ name:'出发 '+selDate, color:'#8e6bb0', width:2.2,
+      vals: d.runs.map(iso=>d.grid[selDate].get(iso)?.price_min ?? null), dash:null });
+  }
+  const tgt = watch.target_departure_date;
+  if (tgt && tgt!==selDate && d.grid[tgt]) {
+    lines.push({ name:'目标日期 '+tgt+' ★', color:'#c08a2d', width:1.8,
+      vals: d.runs.map(iso=>d.grid[tgt].get(iso)?.price_min ?? null), dash:'5 4' });
+  }
+  const all = lines.flatMap(l=>l.vals).filter(Number.isFinite);
+  if (!all.length) return { svg:null, legend:lines };
+  let lo=Math.min(...all), hi=Math.max(...all);
+  if (lo===hi){ lo-=20; hi+=20; }
+  const pad=(hi-lo)*0.15+5; lo-=pad; hi+=pad;
+  const y=v=>T+(1-(v-lo)/(hi-lo))*ph;
+  const n=d.runs.length;
+  const x=i=>L + (n<=1 ? pw/2 : i/(n-1)*pw);
+
+  for(let i=0;i<=4;i++){
+    const yy=T+ph*i/4;
+    svg.appendChild(mk('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#e6ebf2'}));
+    const tx=mk('text',{x:L-8,y:yy+4,'text-anchor':'end','font-size':11,fill:'#6a7789'});
+    tx.textContent=money(Math.round(hi-(hi-lo)*i/4),cur); svg.appendChild(tx);
+  }
+  // 同一天多轮抓取时只显示时间，跨天则带日期
+  const sameDay = new Set(d.runs.map(iso=>new Date(iso).toDateString())).size===1;
+  const step=Math.ceil(n/8);
+  d.runs.forEach((iso,i)=>{
+    if(i%step===0 || i===n-1){
+      const tx=mk('text',{x:x(i),y:T+ph+18,'text-anchor':'middle','font-size':10.5,fill:'#6a7789'});
+      tx.textContent=fmtRun(iso, !sameDay); svg.appendChild(tx);
+    }
+  });
+
+  for (const ln of lines) {
+    let dstr='', started=false;
+    ln.vals.forEach((v,i)=>{
+      if(!Number.isFinite(v)){started=false;return;}
+      dstr += (started?'L':'M')+x(i)+' '+y(v)+' '; started=true;
+    });
+    if (dstr) {
+      const p=mk('path',{d:dstr,fill:'none',stroke:ln.color,'stroke-width':ln.width});
+      if(ln.dash)p.setAttribute('stroke-dasharray',ln.dash);
+      svg.appendChild(p);
+    }
+    ln.vals.forEach((v,i)=>{
+      if(!Number.isFinite(v))return;
+      svg.appendChild(mk('circle',{cx:x(i),cy:y(v),r:3.4,fill:ln.color}));
+    });
+  }
+
+  // 悬停：竖线 + 每条线该轮的值和环比
+  const overlay=mk('rect',{x:L,y:T,width:pw,height:ph,fill:'transparent'});
+  const guide=mk('line',{y1:T,y2:T+ph,stroke:'#9fb2c7','stroke-dasharray':'4 4',opacity:0});
+  svg.appendChild(guide); svg.appendChild(overlay);
+  overlay.addEventListener('mousemove',ev=>{
+    const r=svg.getBoundingClientRect();
+    const px=(ev.clientX-r.left)/r.width*W;
+    const i=Math.max(0,Math.min(n-1,Math.round((px-L)/pw*(n-1)||0)));
+    guide.setAttribute('x1',x(i)); guide.setAttribute('x2',x(i)); guide.setAttribute('opacity',.8);
+    let html=`<b>${fmtFull(d.runs[i])}</b> 抓取`;
+    for(const ln of lines){
+      const v=ln.vals[i];
+      const pv=i>0?ln.vals[i-1]:null;
+      const dd=Number.isFinite(v)&&Number.isFinite(pv)?v-pv:null;
+      html+=`<br/><span style="color:${ln.color}">●</span> ${ln.name}：<b>${money(v,cur)}</b>`+(dd!=null?` （较上轮 ${deltaHtml(dd,cur)}）`:'');
+    }
+    showTip(html,ev);
+  });
+  overlay.addEventListener('mouseleave',()=>{guide.setAttribute('opacity',0);hideTip();});
+  return { svg, legend: lines };
+}
+
+// ———————— 明细表 ————————
+function tableFor(watch, d) {
+  const cur=watch.currency??'USD';
+  const rows = d.series.map(s=>{
+    const pt=d.latest[s.departure_date];
+    const histVals = [...d.grid[s.departure_date].values()].map(p=>p.price_min).filter(Number.isFinite);
+    return { date:s.departure_date, ret:s.return_date, p:pt?.price_min??null,
+      dl:pt?.delta_vs_last_round??null, df:pt?.delta_vs_first_round??null,
+      lo: histVals.length?Math.min(...histVals):null, status:pt?.status };
+  });
+  if (state.sort==='price') rows.sort((a,b)=>(a.p??1e18)-(b.p??1e18));
+  const selDate=state.selDate[watch.id];
+  const tr = rows.map(r=>`<tr data-date="${r.date}" class="${r.date===selDate?'selrow':''}">
+    <td>${r.date}${watch.target_departure_date===r.date?' ★':''}</td>
+    <td>${r.ret??'—'}</td>
+    <td><b>${money(r.p,cur)}</b></td>
+    <td>${deltaHtml(r.dl,cur)}</td>
+    <td>${deltaHtml(r.df,cur)}</td>
+    <td>${money(r.lo,cur)}</td>
+    <td style="color:${r.status==='ok'?'var(--good)':'var(--muted)'}">${r.status==='ok'?'✓':'未抓到'}</td>
+  </tr>`).join('');
+  return `<div class="tablewrap"><table>
+    <thead><tr><th>出发日期</th><th>回程</th><th>最新价</th><th>较上一轮</th><th>较首次</th><th>历史最低</th><th>状态</th></tr></thead>
+    <tbody>${tr}</tbody></table></div>`;
+}
+
+// ———————— 视图 ————————
+function renderTabs() {
+  const el=document.getElementById('tabs');
+  el.innerHTML='';
+  for (const w of state.config.watches) {
+    const b=document.createElement('button');
+    b.className='tab'+(w.id===state.watchId?' active':'');
+    const type = w.trip_type==='one_way'?'单程':'往返';
+    b.innerHTML=`${w.label ?? w.id} <span class="off">· ${type}${w.enabled===false?' · 已停用':''}</span>`;
+    b.onclick=()=>{ state.watchId=w.id; renderView(); renderTabs(); };
+    el.appendChild(b);
+  }
+}
+
+function renderView() {
+  const view=document.getElementById('view');
+  const watch=state.config.watches.find(w=>w.id===state.watchId);
+  const history=state.histories[watch.id];
+  view.innerHTML='';
+  if (!history) {
+    view.innerHTML=`<div class="card"><div class="empty">这个监控任务还没有数据。<br/>本地运行 <code>node flight_watch_once.mjs --watch ${watch.id}</code> 然后 push 即可。</div></div>`;
+    return;
+  }
+  const d=shape(history);
+  const cur=watch.currency??'USD';
+  if (!state.selDate[watch.id]) {
+    // 默认选中最便宜的日期
+    const cheapest=[...d.series].filter(s=>Number.isFinite(d.latest[s.departure_date]?.price_min))
+      .sort((a,b)=>d.latest[a.departure_date].price_min-d.latest[b.departure_date].price_min)[0];
+    if (cheapest) state.selDate[watch.id]=cheapest.departure_date;
+  }
+
+  // 摘要
+  const lastRunIdx=d.runs.length-1;
+  const curMinIdx=d.runMin[lastRunIdx];
+  const prevMin=lastRunIdx>0?d.runMin[lastRunIdx-1]:null;
+  const minDelta=Number.isFinite(curMinIdx)&&Number.isFinite(prevMin)?curMinIdx-prevMin:null;
+  const pricedCount=d.series.filter(s=>Number.isFinite(d.latest[s.departure_date]?.price_min)).length;
+  let cheapestDate=null;
+  for (const s of d.series){
+    const v=d.latest[s.departure_date]?.price_min;
+    if(Number.isFinite(v)&&v===curMinIdx){cheapestDate=s.departure_date;break;}
+  }
+  const sum=document.createElement('div');
+  sum.className='card';
+  sum.innerHTML=`<div class="summary">
+    <div class="stat"><div class="k">当前全场最低</div><div class="v">${money(curMinIdx,cur)}</div><div class="d">${cheapestDate?cheapestDate+' 出发':''}</div></div>
+    <div class="stat"><div class="k">全场最低较上一轮</div><div class="v">${deltaHtml(minDelta,cur)}</div><div class="d">${lastRunIdx>0?'上一轮 '+money(prevMin,cur):'仅 1 轮抓取'}</div></div>
+    <div class="stat"><div class="k">有价日期</div><div class="v">${pricedCount}/${d.series.length}</div><div class="d">出发窗口 ${watch.departure_start?.slice(5)} ~ ${watch.departure_end?.slice(5)}</div></div>
+    <div class="stat"><div class="k">抓取轮数</div><div class="v">${d.runs.length}</div><div class="d">最近 ${fmtFull(d.runs[lastRunIdx])}</div></div>
+  </div>`;
+  view.appendChild(sum);
+
+  // 图1
+  const c1=document.createElement('div');
+  c1.className='card';
+  c1.innerHTML=`<h2>📅 哪天出发更便宜？</h2><div class="hint">每根柱子是一个出发日期的最新最低价（${watch.trip_type==='one_way'?'单程':'往返总价'}），<b style="color:var(--good)">绿色 = 最便宜的 3 天</b>，绿色虚线是全场最低${watch.target_departure_date?'，★ 是目标日期':''}。</div>`;
+  const bc=barChart(watch,d);
+  const mkDiv=(cls,html)=>{const e=document.createElement('div');e.className=cls;e.innerHTML=html;return e;};
+  if(bc)c1.appendChild(bc); else c1.appendChild(mkDiv('empty','最新一轮没有抓到价格'));
+  c1.appendChild(mkDiv('clickhint','👆 点击任意柱子，下面的走势图会切换到那一天'));
+  view.appendChild(c1);
+
+  // 图2
+  const c2=document.createElement('div');
+  c2.className='card';
+  const lc=lineChart(watch,d);
+  const legendHtml=lc.legend.map(l=>`<span><span class="sw" style="background:${l.color}"></span>${l.name}</span>`).join('');
+  c2.innerHTML=`<h2>🕐 不同时间抓取，价格差多少？</h2><div class="hint">横轴是每一轮抓取的时间（比如今天 18 点抓一次、19 点再抓一次，就是两个点），纵轴是当时的价格——一眼看出价格是在涨还是在跌。</div><div class="legend">${legendHtml}</div>`;
+  if (lc.svg) c2.appendChild(lc.svg);
+  if (d.runs.length===1) c2.appendChild(mkDiv('clickhint','目前只抓取了 1 轮，所以只有一个时间点。之后每跑一次 <code>flight_watch_once.mjs</code>，这里就多一个点，价格变化就能连成线了。'));
+  view.appendChild(c2);
+
+  // 表格
+  const c3=document.createElement('div');
+  c3.className='card';
+  c3.innerHTML=`<h2>明细
+    <span class="sortbtns">
+      <button id="sd" class="${state.sort==='date'?'on':''}">按日期排</button>
+      <button id="sp" class="${state.sort==='price'?'on':''}">按价格排</button>
+    </span></h2>
+    <div class="hint">▼绿 = 降价，▲红 = 涨价。点击行可在走势图中查看该日期。</div>` + tableFor(watch,d);
+  view.appendChild(c3);
+  c3.querySelector('#sd').onclick=()=>{state.sort='date';renderView();};
+  c3.querySelector('#sp').onclick=()=>{state.sort='price';renderView();};
+  c3.querySelectorAll('tbody tr').forEach(tr=>{
+    tr.addEventListener('click',()=>{ state.selDate[watch.id]=tr.dataset.date; renderView(); window.scrollTo({top:c2.offsetTop-60,behavior:'smooth'}); });
+  });
+}
+
+async function main() {
+  try {
+    state.config = await getJson('flight_watch_config.json');
+  } catch(e) {
+    document.getElementById('subline').textContent='读取配置失败：'+e.message;
+    return;
+  }
+  let newest=null;
+  await Promise.all(state.config.watches.map(async w=>{
+    try {
+      const h=await getJson('data/'+w.id+'/price_history.json');
+      state.histories[w.id]=h;
+      const last=h.runs?.[h.runs.length-1]?.run_started_at;
+      if(last&&(!newest||last>newest))newest=last;
+    } catch{}
+  }));
+  document.getElementById('subline').textContent = newest ? ('最近一次抓取：'+fmtFull(newest)) : '暂无抓取数据';
+  state.watchId = state.config.watches.find(w=>state.histories[w.id])?.id ?? state.config.watches[0]?.id;
+  renderTabs();
+  renderView();
+}
+main();
+</script>
 </body>
 </html>
