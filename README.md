@@ -1,13 +1,27 @@
 # 机票价格监控（Flight Watch）
 
 配置驱动的 Google Flights 价格监控：在 `flight_watch_config.json` 里定义任意条监控任务
-（航线、日期窗口、行程长度、货币、舱位等），脚本抓取每个出发日期的最低价并累积成历史走势图。
+（航线、日期窗口、行程长度、货币、舱位等），自动抓取每个出发日期的最低价并累积成历史走势图。
 
-## 快速开始
+**网站**: https://yiyangshen04.github.io/flight-watch/
+
+## 全自动模式（GitHub Actions）
+
+- **定时抓价**：`.github/workflows/watch.yml` 每天早晚各跑一轮（芝加哥时间约 10:17 / 22:17），
+  抓完把数据提交回仓库，网站自动更新。没有活跃监控时几秒内空跑结束，公开仓库不产生任何费用。
+- **网页添加监控**：网站右上角「＋ 添加监控」→ 填 Issue 表单提交 →
+  `.github/workflows/add-watch.yml` 自动解析、写入配置、抓第一轮、回帖并关闭 Issue。
+  只有仓库主人提交的表单会被处理，其他人提交会被忽略。
+- **过期自动停**：出发窗口过去后该任务自动跳过，不再抓取（网站上标记「已结束」）。
+  手动停用某任务：把配置里它的 `enabled` 改为 `false`。
+
+## 本地手动跑
 
 ```bash
 cd ~/Desktop/flight_watch
 node flight_watch_once.mjs        # 一键：抓取 -> 入库历史 -> 生成走势图
+node flight_watch_stats.mjs       # 终端统计报告：哪天便宜、每轮价格变化
+git push                          # 推上去网站才会更新
 ```
 
 跑完后打开 `data/<任务id>/overlay_chart.html` 查看价格走势。
