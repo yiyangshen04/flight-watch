@@ -1,0 +1,44 @@
+[
+  {
+    "departure_date": "2026-10-01",
+    "return_date": null,
+    "baseline_price": 519,
+    "baseline_recorded_at": "2026-07-06T10:24:40.254Z"
+  },
+  {
+    "departure_date": "2026-10-02",
+    "return_date": null,
+    "baseline_price": 519,
+    "baseline_recorded_at": "2026-07-06T10:24:40.254Z"
+  },
+  {
+    "departure_date": "2026-10-03",
+    "return_date": null,
+    "baseline_price": 519,
+    "baseline_recorded_at": "2026-07-06T10:24:40.254Z"
+  },
+  {
+    "departure_date": "2026-10-04",
+    "return_date": null,
+    "baseline_price": 355,
+    "baseline_recorded_at": "2026-07-06T10:24:40.254Z"
+  },
+  {
+    "departure_date": "2026-10-05",
+    "return_date": null,
+    "baseline_price": 355,
+    "baseline_recorded_at": "2026-07-06T10:24:40.254Z"
+  },
+  {
+    "departure_date": "2026-10-06",
+    "return_date": null,
+    "baseline_price": 355,
+    "baseline_recorded_at": "2026-07-06T10:24:40.254Z"
+  },
+  {
+    "departure_date": "2026-10-07",
+    "return_date": null,
+    "baseline_price": 355,
+    "baseline_recorded_at": "2026-07-06T10:24:40.254Z"
+  }
+]

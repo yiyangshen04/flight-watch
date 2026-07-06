@@ -1,0 +1,314 @@
+{
+  "created_at": "2026-07-06T10:24:21.644Z",
+  "watch_id": "chi-rom-sep-2026",
+  "label": "Chicago -> Rome, Paris -> Chicago",
+  "route": "CHI -> ROM, PAR -> CHI",
+  "currency": "USD",
+  "series_by_departure_date": {
+    "2026-09-01": {
+      "departure_date": "2026-09-01",
+      "return_date": "2026-09-17",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 681,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-02": {
+      "departure_date": "2026-09-02",
+      "return_date": "2026-09-18",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 710,
+          "status": "ok",
+          "prices_found": 26,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-03": {
+      "departure_date": "2026-09-03",
+      "return_date": "2026-09-19",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 846,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-04": {
+      "departure_date": "2026-09-04",
+      "return_date": "2026-09-20",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 920,
+          "status": "ok",
+          "prices_found": 22,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-05": {
+      "departure_date": "2026-09-05",
+      "return_date": "2026-09-21",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 742,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-06": {
+      "departure_date": "2026-09-06",
+      "return_date": "2026-09-22",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 681,
+          "status": "ok",
+          "prices_found": 20,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-07": {
+      "departure_date": "2026-09-07",
+      "return_date": "2026-09-23",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 626,
+          "status": "ok",
+          "prices_found": 22,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-08": {
+      "departure_date": "2026-09-08",
+      "return_date": "2026-09-24",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": null,
+          "status": "no_prices_found",
+          "prices_found": 0,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-09": {
+      "departure_date": "2026-09-09",
+      "return_date": "2026-09-25",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 710,
+          "status": "ok",
+          "prices_found": 22,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-10": {
+      "departure_date": "2026-09-10",
+      "return_date": "2026-09-26",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 615,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-11": {
+      "departure_date": "2026-09-11",
+      "return_date": "2026-09-27",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 862,
+          "status": "ok",
+          "prices_found": 26,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-12": {
+      "departure_date": "2026-09-12",
+      "return_date": "2026-09-28",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 757,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-13": {
+      "departure_date": "2026-09-13",
+      "return_date": "2026-09-29",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": null,
+          "status": "no_prices_found",
+          "prices_found": 0,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    },
+    "2026-09-14": {
+      "departure_date": "2026-09-14",
+      "return_date": "2026-09-30",
+      "points": [
+        {
+          "run_started_at": "2026-07-06T10:24:01.129Z",
+          "price_min": 643,
+          "status": "ok",
+          "prices_found": 20,
+          "baseline_price": null,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "run_started_at": "2026-07-06T10:24:01.129Z",
+      "summary": {
+        "run_started_at": "2026-07-06T10:24:01.129Z",
+        "watch_id": "chi-rom-sep-2026",
+        "label": "Chicago -> Rome, Paris -> Chicago",
+        "route": "CHI -> ROM, PAR -> CHI",
+        "trip_type": "round_trip",
+        "currency": "USD",
+        "adults": 1,
+        "seat": "economy",
+        "departure_start": "2026-09-01",
+        "departure_end": "2026-09-14",
+        "trip_length_days": 16,
+        "rows_total": 14,
+        "rows_with_price": 12,
+        "min": 615,
+        "median": 710,
+        "mean": 732.75,
+        "max": 920,
+        "target_row": {
+          "departure_date": "2026-09-05",
+          "return_date": "2026-09-21",
+          "baseline_price": null,
+          "previous_price": null,
+          "price_min": 742,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null,
+          "prices_found": 24,
+          "status": "ok",
+          "debug": {
+            "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMDVqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTIxagUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
+            "attempts": [
+              {
+                "attempt": 1,
+                "ok": true,
+                "statusCode": 200,
+                "prices_found": 0
+              },
+              {
+                "attempt": 2,
+                "ok": true,
+                "statusCode": 200,
+                "prices_found": 24
+              }
+            ]
+          }
+        },
+        "cheapest_5_dates": [
+          {
+            "departure_date": "2026-09-10",
+            "return_date": "2026-09-26",
+            "price_min": 615
+          },
+          {
+            "departure_date": "2026-09-07",
+            "return_date": "2026-09-23",
+            "price_min": 626
+          },
+          {
+            "departure_date": "2026-09-14",
+            "return_date": "2026-09-30",
+            "price_min": 643
+          },
+          {
+            "departure_date": "2026-09-01",
+            "return_date": "2026-09-17",
+            "price_min": 681
+          },
+          {
+            "departure_date": "2026-09-06",
+            "return_date": "2026-09-22",
+            "price_min": 681
+          }
+        ],
+        "notes": []
+      },
+      "rows_count": 14
+    }
+  ]
+}

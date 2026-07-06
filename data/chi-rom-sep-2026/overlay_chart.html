@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flight Watch: Chicago -&gt; Rome, Paris -&gt; Chicago</title>
+  <style>
+    :root {
+      --card: #ffffff;
+      --ink: #1c2430;
+      --muted: #66758a;
+      --line-latest: #1f7a8c;
+      --line-prev: #9b6b9e;
+      --line-base: #a6761d;
+    }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background: linear-gradient(160deg, #eef3f8, #f9fbfd 45%, #edf6f3); color: var(--ink); }
+    .wrap { max-width: 1220px; margin: 24px auto; padding: 0 14px 28px; }
+    .card { background: var(--card); border-radius: 16px; box-shadow: 0 12px 28px rgba(19,35,58,.08); border: 1px solid #e7edf4; }
+    .head { padding: 18px 18px 8px; }
+    h1 { margin: 0; font-size: 21px; }
+    .sub { margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .stats { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 10px; padding: 8px 18px 18px; }
+    .stat { background: #f8fbff; border: 1px solid #e3ebf6; border-radius: 10px; padding: 9px 10px; }
+    .stat .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .stat .v { margin-top: 4px; font-weight: 700; }
+    .chart { padding: 0 10px 16px; position: relative; }
+    canvas { width: 100%; height: 420px; display: block; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--muted); padding: 0 18px 14px; }
+    .dot { width: 10px; height: 10px; border-radius: 99px; display: inline-block; margin-right: 6px; }
+    .tooltip { position: fixed; pointer-events: none; z-index: 99; max-width: 360px; background: #101827; color: #edf4ff; border: 1px solid rgba(255,255,255,.15); border-radius: 10px; box-shadow: 0 12px 26px rgba(0,0,0,.35); padding: 10px 12px; font-size: 12px; line-height: 1.4; opacity: 0; transform: translateY(4px); transition: opacity .12s ease, transform .12s ease; }
+    .tooltip.visible { opacity: 1; transform: translateY(0); }
+    .tooltip .t { font-weight: 700; margin-bottom: 4px; }
+    .tooltip .muted { color: #b8c7dd; }
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      canvas { height: 360px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="head">
+        <h1>Flight Price Watch: Chicago -&gt; Rome, Paris -&gt; Chicago</h1>
+        <div class="sub">CHI -&gt; ROM, PAR -&gt; CHI | USD | Generated 2026-07-06T10:24:21.664Z | Run start 2026-07-06T10:24:01.129Z | Total saved runs 1</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k">Rows</div><div class="v">14</div></div>
+        <div class="stat"><div class="k">Rows With Price</div><div class="v">12</div></div>
+        <div class="stat"><div class="k">Min</div><div class="v">615</div></div>
+        <div class="stat"><div class="k">Median</div><div class="v">710</div></div>
+        <div class="stat"><div class="k">Mean</div><div class="v">732.75</div></div>
+        <div class="stat"><div class="k">Max</div><div class="v">920</div></div>
+      </div>
+      <div class="chart"><canvas id="c"></canvas></div>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--line-latest)"></span>Latest round</span>
+        <span><span class="dot" style="background:var(--line-prev)"></span>Previous round</span>
+        <span><span class="dot" style="background:var(--line-base)"></span>Baseline (first captured)</span>
+      </div>
+    </div>
+  </div>
+  <div id="tip" class="tooltip"></div>
+
+  <script>
+    const DATA = {"generated_at":"2026-07-06T10:24:21.664Z","run_started_at":"2026-07-06T10:24:01.129Z","run_count":1,"label":"Chicago -> Rome, Paris -> Chicago","route":"CHI -> ROM, PAR -> CHI","currency":"USD","currency_symbol":"$","xLabels":["2026-09-01","2026-09-02","2026-09-03","2026-09-04","2026-09-05","2026-09-06","2026-09-07","2026-09-08","2026-09-09","2026-09-10","2026-09-11","2026-09-12","2026-09-13","2026-09-14"],"latestLine":[681,710,846,920,742,681,626,null,710,615,862,757,null,643],"previousLine":[null,null,null,null,null,null,null,null,null,null,null,null,null,null],"baselineLine":[681,710,846,920,742,681,626,null,710,615,862,757,null,643],"series":[{"departure_date":"2026-09-01","return_date":"2026-09-17","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":681,"status":"ok","prices_found":24,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-02","return_date":"2026-09-18","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":710,"status":"ok","prices_found":26,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-03","return_date":"2026-09-19","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":846,"status":"ok","prices_found":24,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-04","return_date":"2026-09-20","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":920,"status":"ok","prices_found":22,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-05","return_date":"2026-09-21","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":742,"status":"ok","prices_found":24,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-06","return_date":"2026-09-22","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":681,"status":"ok","prices_found":20,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-07","return_date":"2026-09-23","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":626,"status":"ok","prices_found":22,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-08","return_date":"2026-09-24","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":null,"status":"no_prices_found","prices_found":0,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-09","return_date":"2026-09-25","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":710,"status":"ok","prices_found":22,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-10","return_date":"2026-09-26","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":615,"status":"ok","prices_found":24,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-11","return_date":"2026-09-27","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":862,"status":"ok","prices_found":26,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-12","return_date":"2026-09-28","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":757,"status":"ok","prices_found":24,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-13","return_date":"2026-09-29","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":null,"status":"no_prices_found","prices_found":0,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]},{"departure_date":"2026-09-14","return_date":"2026-09-30","points":[{"run_started_at":"2026-07-06T10:24:01.129Z","price_min":643,"status":"ok","prices_found":20,"baseline_price":null,"previous_price":null,"delta_vs_last_round":null,"delta_vs_first_round":null}]}],"summary":{"min":615,"median":710,"mean":732.75,"max":920,"rows_total":14,"rows_with_price":12}};
+    const CUR = DATA.currency_symbol;
+    const c = document.getElementById('c');
+    const tip = document.getElementById('tip');
+    const ctx = c.getContext('2d');
+
+    function fit() {
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const rect = c.getBoundingClientRect();
+      c.width = Math.floor(rect.width * dpr);
+      c.height = Math.floor(rect.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+
+    function extent(lines) {
+      const vals = lines.flat().filter((v) => Number.isFinite(v));
+      if (!vals.length) return [0, 1];
+      let lo = Math.min(...vals);
+      let hi = Math.max(...vals);
+      if (lo === hi) { lo -= 1; hi += 1; }
+      const pad = Math.max(20, (hi - lo) * 0.1);
+      return [lo - pad, hi + pad];
+    }
+
+    function drawLine(points, color, xPos, yPos) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      let started = false;
+      for (let i = 0; i < points.length; i += 1) {
+        const yv = points[i];
+        if (!Number.isFinite(yv)) { started = false; continue; }
+        const x = xPos(i);
+        const y = yPos(yv);
+        if (!started) { ctx.moveTo(x, y); started = true; } else { ctx.lineTo(x, y); }
+      }
+      ctx.stroke();
+      for (let i = 0; i < points.length; i += 1) {
+        const yv = points[i];
+        if (!Number.isFinite(yv)) continue;
+        const x = xPos(i);
+        const y = yPos(yv);
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, 2.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    let hover = null;
+
+    function draw() {
+      const w = c.clientWidth;
+      const h = c.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      const m = { top: 20, right: 20, bottom: 76, left: 62 };
+      const plot = { x: m.left, y: m.top, w: w - m.left - m.right, h: h - m.top - m.bottom };
+
+      const labels = DATA.xLabels;
+      const lines = [DATA.latestLine, DATA.previousLine, DATA.baselineLine];
+      const yy = extent(lines);
+      const yMin = yy[0];
+      const yMax = yy[1];
+
+      const xPos = (i) => plot.x + (labels.length <= 1 ? plot.w / 2 : (i / (labels.length - 1)) * plot.w);
+      const yPos = (v) => plot.y + (1 - (v - yMin) / (yMax - yMin)) * plot.h;
+
+      ctx.strokeStyle = '#e3e8ef';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 5; i += 1) {
+        const y = plot.y + (i / 5) * plot.h;
+        ctx.beginPath();
+        ctx.moveTo(plot.x, y);
+        ctx.lineTo(plot.x + plot.w, y);
+        ctx.stroke();
+
+        const val = yMax - ((yMax - yMin) * i) / 5;
+        ctx.fillStyle = '#6a7789';
+        ctx.font = '11px ui-sans-serif, system-ui';
+        ctx.textAlign = 'right';
+        ctx.fillText(CUR + Math.round(val), plot.x - 8, y + 4);
+      }
+
+      ctx.strokeStyle = '#d6deea';
+      ctx.beginPath();
+      ctx.moveTo(plot.x, plot.y + plot.h);
+      ctx.lineTo(plot.x + plot.w, plot.y + plot.h);
+      ctx.stroke();
+
+      drawLine(DATA.baselineLine, getComputedStyle(document.documentElement).getPropertyValue('--line-base').trim(), xPos, yPos);
+      drawLine(DATA.previousLine, getComputedStyle(document.documentElement).getPropertyValue('--line-prev').trim(), xPos, yPos);
+      drawLine(DATA.latestLine, getComputedStyle(document.documentElement).getPropertyValue('--line-latest').trim(), xPos, yPos);
+
+      ctx.fillStyle = '#6a7789';
+      ctx.font = '11px ui-sans-serif, system-ui';
+      ctx.textAlign = 'center';
+      const step = Math.max(1, Math.ceil(labels.length / 10));
+      for (let i = 0; i < labels.length; i += step) {
+        const x = xPos(i);
+        const lbl = labels[i].slice(5);
+        ctx.fillText(lbl, x, plot.y + plot.h + 16);
+      }
+
+      if (hover != null) {
+        const x = xPos(hover);
+        ctx.strokeStyle = '#9fb2c7';
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(x, plot.y);
+        ctx.lineTo(x, plot.y + plot.h);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    function seriesPopupHtml(s) {
+      const latest = s.points[s.points.length - 1] || {};
+      const rows = s.points
+        .map((p) => p.run_started_at + ': ' + (Number.isFinite(p.price_min) ? (CUR + p.price_min) : 'n/a') + ' (' + p.status + ')')
+        .join('<br/>');
+      const latestVal = Number.isFinite(latest.price_min) ? (CUR + latest.price_min) : 'n/a';
+      return '<div class="t">' + s.departure_date + (s.return_date ? (' -> ' + s.return_date) : '') + '</div>' +
+        '<div>Latest: <b>' + latestVal + '</b> | Status: <span class="muted">' + (latest.status || 'n/a') + '</span></div>' +
+        '<div class="muted" style="margin-top:6px; max-height:180px; overflow:auto">' + (rows || 'No history') + '</div>';
+    }
+
+    c.addEventListener('mousemove', (ev) => {
+      const rect = c.getBoundingClientRect();
+      const x = ev.clientX - rect.left;
+      const labels = DATA.xLabels;
+      const m = { left: 62, right: 20 };
+      const plotW = rect.width - m.left - m.right;
+      if (labels.length < 1 || x < m.left - 10 || x > rect.width - m.right + 10) {
+        hover = null;
+        tip.classList.remove('visible');
+        draw();
+        return;
+      }
+      const t = (x - m.left) / Math.max(1, plotW);
+      const i = Math.min(labels.length - 1, Math.max(0, Math.round(t * (labels.length - 1))));
+      hover = i;
+      draw();
+
+      const s = DATA.series[i];
+      if (!s) return;
+      tip.innerHTML = seriesPopupHtml(s);
+      tip.style.left = Math.min(window.innerWidth - 380, ev.clientX + 14) + 'px';
+      tip.style.top = Math.min(window.innerHeight - 260, ev.clientY + 14) + 'px';
+      tip.classList.add('visible');
+    });
+
+    c.addEventListener('mouseleave', () => {
+      hover = null;
+      tip.classList.remove('visible');
+      draw();
+    });
+
+    window.addEventListener('resize', fit);
+    fit();
+  </script>
+</body>
+</html>

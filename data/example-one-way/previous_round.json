@@ -1,0 +1,156 @@
+[
+  {
+    "departure_date": "2026-10-01",
+    "return_date": null,
+    "baseline_price": null,
+    "previous_price": null,
+    "price_min": 519,
+    "delta_vs_last_round": null,
+    "delta_vs_first_round": null,
+    "prices_found": 6,
+    "status": "ok",
+    "debug": {
+      "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjYtMTAtMDFqBRIDQ0hJcgUSA1BBUigAQAFIAZgBAg&hl=en&gl=US&curr=USD",
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "statusCode": 200,
+          "prices_found": 6
+        }
+      ]
+    }
+  },
+  {
+    "departure_date": "2026-10-02",
+    "return_date": null,
+    "baseline_price": null,
+    "previous_price": null,
+    "price_min": 519,
+    "delta_vs_last_round": null,
+    "delta_vs_first_round": null,
+    "prices_found": 6,
+    "status": "ok",
+    "debug": {
+      "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjYtMTAtMDJqBRIDQ0hJcgUSA1BBUigAQAFIAZgBAg&hl=en&gl=US&curr=USD",
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "statusCode": 200,
+          "prices_found": 6
+        }
+      ]
+    }
+  },
+  {
+    "departure_date": "2026-10-03",
+    "return_date": null,
+    "baseline_price": null,
+    "previous_price": null,
+    "price_min": 519,
+    "delta_vs_last_round": null,
+    "delta_vs_first_round": null,
+    "prices_found": 6,
+    "status": "ok",
+    "debug": {
+      "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjYtMTAtMDNqBRIDQ0hJcgUSA1BBUigAQAFIAZgBAg&hl=en&gl=US&curr=USD",
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "statusCode": 200,
+          "prices_found": 6
+        }
+      ]
+    }
+  },
+  {
+    "departure_date": "2026-10-04",
+    "return_date": null,
+    "baseline_price": null,
+    "previous_price": null,
+    "price_min": 355,
+    "delta_vs_last_round": null,
+    "delta_vs_first_round": null,
+    "prices_found": 6,
+    "status": "ok",
+    "debug": {
+      "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjYtMTAtMDRqBRIDQ0hJcgUSA1BBUigAQAFIAZgBAg&hl=en&gl=US&curr=USD",
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "statusCode": 200,
+          "prices_found": 6
+        }
+      ]
+    }
+  },
+  {
+    "departure_date": "2026-10-05",
+    "return_date": null,
+    "baseline_price": null,
+    "previous_price": null,
+    "price_min": 355,
+    "delta_vs_last_round": null,
+    "delta_vs_first_round": null,
+    "prices_found": 6,
+    "status": "ok",
+    "debug": {
+      "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjYtMTAtMDVqBRIDQ0hJcgUSA1BBUigAQAFIAZgBAg&hl=en&gl=US&curr=USD",
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "statusCode": 200,
+          "prices_found": 6
+        }
+      ]
+    }
+  },
+  {
+    "departure_date": "2026-10-06",
+    "return_date": null,
+    "baseline_price": null,
+    "previous_price": null,
+    "price_min": 355,
+    "delta_vs_last_round": null,
+    "delta_vs_first_round": null,
+    "prices_found": 6,
+    "status": "ok",
+    "debug": {
+      "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjYtMTAtMDZqBRIDQ0hJcgUSA1BBUigAQAFIAZgBAg&hl=en&gl=US&curr=USD",
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "statusCode": 200,
+          "prices_found": 6
+        }
+      ]
+    }
+  },
+  {
+    "departure_date": "2026-10-07",
+    "return_date": null,
+    "baseline_price": null,
+    "previous_price": null,
+    "price_min": 355,
+    "delta_vs_last_round": null,
+    "delta_vs_first_round": null,
+    "prices_found": 6,
+    "status": "ok",
+    "debug": {
+      "url": "https://www.google.com/travel/flights/search?tfs=GhwSCjIwMjYtMTAtMDdqBRIDQ0hJcgUSA1BBUigAQAFIAZgBAg&hl=en&gl=US&curr=USD",
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "statusCode": 200,
+          "prices_found": 6
+        }
+      ]
+    }
+  }
+]
