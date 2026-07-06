@@ -37,20 +37,6 @@
       "departure_end": "2026-10-07",
       "currency": "USD",
       "max_stops": 0
-    },
-    {
-      "id": "ord-lax-20260803",
-      "enabled": true,
-      "trip_type": "one_way",
-      "outbound": {
-        "from": "ORD",
-        "to": "LAX"
-      },
-      "departure_start": "2026-08-03",
-      "departure_end": "2026-08-06",
-      "currency": "USD",
-      "max_stops": 0,
-      "label": "测试：单程芝加哥-洛杉矶"
     }
   ]
 }
