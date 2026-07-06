@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>机票价格监控</title>
+  <style>
+    :root { --card:#fff; --ink:#1c2430; --muted:#66758a; --accent:#1f7a8c; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: linear-gradient(160deg,#eef3f8,#f9fbfd 45%,#edf6f3); color: var(--ink); min-height:100vh; }
+    .wrap { max-width: 980px; margin: 32px auto; padding: 0 16px 40px; }
+    h1 { font-size: 26px; margin: 0 0 4px; }
+    .sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+    .card { background: var(--card); border-radius: 16px; box-shadow: 0 12px 28px rgba(19,35,58,.08); border: 1px solid #e7edf4; padding: 18px 20px; margin-bottom: 18px; }
+    .card h2 { margin: 0; font-size: 18px; }
+    .route { color: var(--muted); font-size: 13px; margin: 4px 0 12px; }
+    .badge { display:inline-block; font-size:11px; padding:2px 8px; border-radius:99px; background:#eef6f8; color:var(--accent); border:1px solid #d5e8ec; margin-left:8px; vertical-align:2px; }
+    .badge.off { background:#f4f4f5; color:#8a8f98; border-color:#e4e4e7; }
+    .stats { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+    .stat { background:#f8fbff; border:1px solid #e3ebf6; border-radius:10px; padding:8px 14px; min-width:110px; }
+    .stat .k { font-size:11px; color:var(--muted); }
+    .stat .v { font-size:18px; font-weight:700; margin-top:2px; }
+    .cheap { font-size: 13px; color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
+    .cheap b { color: var(--ink); }
+    a.btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-size:14px; padding:8px 16px; border-radius:10px; }
+    a.btn:hover { filter: brightness(1.08); }
+    .err { color:#a33; font-size:13px; }
+    .foot { color:var(--muted); font-size:12px; margin-top:24px; line-height:1.6; }
+    .foot code { background:#eef2f7; padding:1px 6px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>✈️ 机票价格监控</h1>
+    <div class="sub" id="updated">加载中…</div>
+    <div id="watches"></div>
+    <div class="foot">
+      数据在本地运行 <code>node flight_watch_once.mjs</code> 并 <code>git push</code> 后更新。
+      每个卡片的走势图里可以查看各出发日期的完整价格历史。
+    </div>
+  </div>
+
+  <script>
+    const fmtMoney = (v, cur) => v == null ? 'n/a' : ({USD:'$',EUR:'€',GBP:'£',JPY:'¥',CNY:'¥'}[cur] ?? cur + ' ') + v;
+    const fmtTime = (iso) => iso ? new Date(iso).toLocaleString('zh-CN', { hour12: false }) : 'n/a';
+
+    async function getJson(url) {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(res.status);
+      return res.json();
+    }
+
+    async function main() {
+      const box = document.getElementById('watches');
+      let config;
+      try {
+        config = await getJson('flight_watch_config.json');
+      } catch (e) {
+        document.getElementById('updated').textContent = '读取配置失败：' + e.message;
+        return;
+      }
+
+      let newest = null;
+      for (const w of config.watches) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        let latest = null;
+        try { latest = await getJson('data/' + w.id + '/latest_round.json'); } catch {}
+        const s = latest?.summary;
+        if (s?.run_started_at && (!newest || s.run_started_at > newest)) newest = s.run_started_at;
+
+        const routeBits = [];
+        routeBits.push((w.outbound?.from ?? '?') + ' → ' + (w.outbound?.to ?? '?'));
+        if (w.trip_type !== 'one_way') {
+          const rf = w.return?.from ?? w.outbound?.to, rt = w.return?.to ?? w.outbound?.from;
+          routeBits.push(rf + ' → ' + rt);
+        }
+        const cheap = (s?.cheapest_5_dates ?? []).map((d) =>
+          '<b>' + fmtMoney(d.price_min, s.currency) + '</b>（' + d.departure_date + (d.return_date ? ' ~ ' + d.return_date : '') + '）'
+        ).join('、 ');
+
+        card.innerHTML =
+          '<h2>' + (w.label ?? w.id) +
+            '<span class="badge' + (w.enabled === false ? ' off' : '') + '">' + (w.enabled === false ? '已停用' : (w.trip_type === 'one_way' ? '单程' : '往返')) + '</span></h2>' +
+          '<div class="route">' + routeBits.join('，回程 ') + ' ｜ 出发窗口 ' + w.departure_start + ' ~ ' + w.departure_end +
+            (w.trip_length_days ? '，行程 ' + w.trip_length_days + ' 天' : '') + '</div>' +
+          (s ? (
+            '<div class="stats">' +
+              '<div class="stat"><div class="k">当前最低</div><div class="v">' + fmtMoney(s.min, s.currency) + '</div></div>' +
+              '<div class="stat"><div class="k">中位数</div><div class="v">' + fmtMoney(s.median, s.currency) + '</div></div>' +
+              '<div class="stat"><div class="k">有价日期</div><div class="v">' + s.rows_with_price + '/' + s.rows_total + '</div></div>' +
+              '<div class="stat"><div class="k">最近抓取</div><div class="v" style="font-size:13px">' + fmtTime(s.run_started_at) + '</div></div>' +
+            '</div>' +
+            (cheap ? '<div class="cheap">最便宜：' + cheap + '</div>' : '') +
+            '<a class="btn" href="data/' + w.id + '/overlay_chart.html">查看价格走势图 →</a>'
+          ) : '<div class="err">还没有抓取数据（本地运行一次 flight_watch_once.mjs 后 push 即可）</div>');
+        box.appendChild(card);
+      }
+      document.getElementById('updated').textContent = newest
+        ? '最近一次抓取：' + fmtTime(newest)
+        : '暂无抓取数据';
+    }
+    main();
+  </script>
+</body>
+</html>
