@@ -1,0 +1,52 @@
+name: Add watch from issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: flight-watch-data
+
+jobs:
+  add:
+    # 只处理带 add-watch 标签、且由仓库主人提交的 issue
+    if: contains(github.event.issue.labels.*.name, 'add-watch') && github.event.issue.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Parse issue form and update config
+        id: parse
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: node scripts/add_watch_from_issue.mjs
+      - name: First scrape for the new watch
+        run: node flight_watch_once.mjs --watch "${{ steps.parse.outputs.id }}"
+      - name: Commit
+        run: |
+          git config user.name "flight-watch-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add flight_watch_config.json data
+          git commit -m "Add watch ${{ steps.parse.outputs.id }} (#${{ github.event.issue.number }})"
+          git pull --rebase origin main
+          git push
+      - name: Comment and close issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+            --body "✅ 已添加监控 \`${{ steps.parse.outputs.id }}\` 并完成第一轮抓价。网站一两分钟后更新：https://yiyangshen04.github.io/flight-watch/"
+          gh issue close ${{ github.event.issue.number }} --repo ${{ github.repository }}
+      - name: Report failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+            --body "❌ 添加失败：$(cat parse_error.txt 2>/dev/null || echo '请查看 Actions 日志') — 修改后请重新提交一个新的表单。"

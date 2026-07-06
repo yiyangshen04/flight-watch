@@ -66,7 +66,12 @@ export function watchPaths(watchId) {
   };
 }
 
-function normalizeWatch(raw, index) {
+// 出发窗口已完全过去的任务视为过期，定时抓取会跳过
+export function isExpired(watch, todayIso = new Date().toISOString().slice(0, 10)) {
+  return watch.departure_end < todayIso;
+}
+
+export function normalizeWatch(raw, index) {
   const w = { ...raw };
   if (!w.id) throw new Error(`watches[${index}] 缺少 id`);
   if (!/^[a-zA-Z0-9_-]+$/.test(w.id)) throw new Error(`watch id "${w.id}" 只能包含字母、数字、- 和 _（要用作文件夹名）`);

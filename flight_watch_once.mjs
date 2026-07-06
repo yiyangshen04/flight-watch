@@ -1,16 +1,26 @@
 // 一键执行：抓取一轮 -> 入库历史 -> 生成走势图
 // 用法: node flight_watch_once.mjs [--watch <id>]
-import { loadConfig, selectWatches } from './flight_watch_lib.mjs';
+import { loadConfig, selectWatches, isExpired } from './flight_watch_lib.mjs';
 import { runRound } from './run_flight_watch_round.mjs';
 import { updateHistory } from './update_flight_watch_history.mjs';
 import { renderChart } from './render_flight_watch_overlay_chart.mjs';
 
 const { settings, watches } = await loadConfig();
-const selected = selectWatches(watches);
+const argv = process.argv.slice(2);
+let selected;
+if (argv.includes('--watch')) {
+  selected = selectWatches(watches, argv); // 显式指定时不过滤，方便手动补跑
+} else {
+  selected = watches.filter((w) => w.enabled);
+  for (const w of selected.filter(isExpired)) {
+    console.error(`[${w.id}] 出发窗口已结束（${w.departure_end}），跳过`);
+  }
+  selected = selected.filter((w) => !isExpired(w));
+}
 
 if (selected.length === 0) {
-  console.log('没有启用中的 watch，请检查 flight_watch_config.json');
-  process.exit(1);
+  console.log('当前没有需要抓取的监控任务（全部停用或已过期），本次空跑结束');
+  process.exit(0);
 }
 
 const results = [];

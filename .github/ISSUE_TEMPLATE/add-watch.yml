@@ -1,0 +1,92 @@
+name: ➕ 添加机票监控
+description: 提交一条新的机票价格监控（仅仓库主人提交会生效，机器人会自动处理）
+title: "[监控] 新航线"
+labels: ["add-watch"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        填好下面的字段提交后，机器人会自动把这条监控写进配置、立刻抓第一轮价格，
+        几分钟后就能在 [网站](https://yiyangshen04.github.io/flight-watch/) 上看到。
+  - type: input
+    id: from
+    attributes:
+      label: 出发地代码
+      description: 机场或城市代码，如 CHI（芝加哥）、PEK（北京）、SHA（上海）
+      placeholder: CHI
+    validations:
+      required: true
+  - type: input
+    id: to
+    attributes:
+      label: 目的地代码
+      placeholder: ROM
+    validations:
+      required: true
+  - type: dropdown
+    id: trip_type
+    attributes:
+      label: 行程类型
+      options:
+        - 往返
+        - 单程
+      default: 0
+    validations:
+      required: true
+  - type: input
+    id: dep_start
+    attributes:
+      label: 出发窗口开始日期
+      description: 会监控这个窗口内每一天出发的价格，格式 YYYY-MM-DD
+      placeholder: "2026-09-01"
+    validations:
+      required: true
+  - type: input
+    id: dep_end
+    attributes:
+      label: 出发窗口结束日期
+      placeholder: "2026-09-14"
+    validations:
+      required: true
+  - type: input
+    id: trip_length
+    attributes:
+      label: 行程天数（往返必填）
+      description: 回程日期 = 出发日期 + 行程天数
+      placeholder: "16"
+  - type: input
+    id: return_route
+    attributes:
+      label: 回程航段（可选，开口行程用）
+      description: 格式 PAR-CHI，表示回程从巴黎飞芝加哥；留空则按去程反向
+      placeholder: PAR-CHI
+  - type: dropdown
+    id: currency
+    attributes:
+      label: 货币
+      options:
+        - USD
+        - EUR
+        - CNY
+        - GBP
+        - JPY
+      default: 0
+  - type: dropdown
+    id: nonstop
+    attributes:
+      label: 中转限制
+      options:
+        - 不限
+        - 只看直飞
+      default: 0
+  - type: input
+    id: target_date
+    attributes:
+      label: 目标出发日期（可选）
+      description: 特别关注的那一天，网站上会用 ★ 标出
+      placeholder: "2026-09-05"
+  - type: input
+    id: label
+    attributes:
+      label: 显示名称（可选）
+      placeholder: 芝加哥-罗马 九月

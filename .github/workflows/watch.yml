@@ -1,0 +1,36 @@
+name: Scheduled price scrape
+
+on:
+  schedule:
+    # UTC 03:17 / 15:17 = 芝加哥 22:17（前一晚）/ 10:17（CDT），每天早晚各一轮
+    - cron: "17 3,15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: flight-watch-data
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Scrape all active watches
+        run: node flight_watch_once.mjs
+      - name: Commit updated data
+        run: |
+          git config user.name "flight-watch-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "没有数据变化，跳过提交"
+          else
+            git commit -m "Data update $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git pull --rebase origin main
+            git push
+          fi
