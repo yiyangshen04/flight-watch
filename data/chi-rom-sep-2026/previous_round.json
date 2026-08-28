@@ -3,11 +3,11 @@
     "departure_date": "2026-09-01",
     "return_date": "2026-09-17",
     "baseline_price": 681,
-    "previous_price": 880,
+    "previous_price": 894,
     "price_min": 894,
-    "delta_vs_last_round": 14,
+    "delta_vs_last_round": 0,
     "delta_vs_first_round": 213,
-    "prices_found": 20,
+    "prices_found": 22,
     "status": "ok",
     "debug": {
       "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMDFqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTE3agUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
@@ -16,7 +16,7 @@
           "attempt": 1,
           "ok": true,
           "statusCode": 200,
-          "prices_found": 20
+          "prices_found": 22
         }
       ]
     }
@@ -29,7 +29,7 @@
     "price_min": 946,
     "delta_vs_last_round": 0,
     "delta_vs_first_round": 236,
-    "prices_found": 28,
+    "prices_found": 26,
     "status": "ok",
     "debug": {
       "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMDJqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTE4agUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
@@ -38,7 +38,7 @@
           "attempt": 1,
           "ok": true,
           "statusCode": 200,
-          "prices_found": 28
+          "prices_found": 26
         }
       ]
     }
@@ -69,11 +69,11 @@
     "departure_date": "2026-09-04",
     "return_date": "2026-09-20",
     "baseline_price": 920,
-    "previous_price": 1271,
-    "price_min": 1213,
-    "delta_vs_last_round": -58,
-    "delta_vs_first_round": 293,
-    "prices_found": 30,
+    "previous_price": 1213,
+    "price_min": 1270,
+    "delta_vs_last_round": 57,
+    "delta_vs_first_round": 350,
+    "prices_found": 34,
     "status": "ok",
     "debug": {
       "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMDRqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTIwagUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
@@ -82,7 +82,7 @@
           "attempt": 1,
           "ok": true,
           "statusCode": 200,
-          "prices_found": 30
+          "prices_found": 34
         }
       ]
     }
@@ -135,9 +135,9 @@
     "departure_date": "2026-09-07",
     "return_date": "2026-09-23",
     "baseline_price": 626,
-    "previous_price": 964,
+    "previous_price": 981,
     "price_min": 981,
-    "delta_vs_last_round": 17,
+    "delta_vs_last_round": 0,
     "delta_vs_first_round": 355,
     "prices_found": 22,
     "status": "ok",
@@ -157,9 +157,9 @@
     "departure_date": "2026-09-08",
     "return_date": "2026-09-24",
     "baseline_price": 634,
-    "previous_price": 840,
+    "previous_price": 838,
     "price_min": 838,
-    "delta_vs_last_round": -2,
+    "delta_vs_last_round": 0,
     "delta_vs_first_round": 204,
     "prices_found": 20,
     "status": "ok",
@@ -179,10 +179,10 @@
     "departure_date": "2026-09-09",
     "return_date": "2026-09-25",
     "baseline_price": 710,
-    "previous_price": null,
-    "price_min": 798,
-    "delta_vs_last_round": null,
-    "delta_vs_first_round": 88,
+    "previous_price": 798,
+    "price_min": 828,
+    "delta_vs_last_round": 30,
+    "delta_vs_first_round": 118,
     "prices_found": 24,
     "status": "ok",
     "debug": {
@@ -201,11 +201,11 @@
     "departure_date": "2026-09-10",
     "return_date": "2026-09-26",
     "baseline_price": 615,
-    "previous_price": null,
-    "price_min": 954,
-    "delta_vs_last_round": null,
-    "delta_vs_first_round": 339,
-    "prices_found": 24,
+    "previous_price": 954,
+    "price_min": 920,
+    "delta_vs_last_round": -34,
+    "delta_vs_first_round": 305,
+    "prices_found": 22,
     "status": "ok",
     "debug": {
       "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMTBqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTI2agUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
@@ -214,7 +214,7 @@
           "attempt": 1,
           "ok": true,
           "statusCode": 200,
-          "prices_found": 24
+          "prices_found": 22
         }
       ]
     }
@@ -245,11 +245,11 @@
     "departure_date": "2026-09-12",
     "return_date": "2026-09-28",
     "baseline_price": 757,
-    "previous_price": 985,
-    "price_min": 1016,
-    "delta_vs_last_round": 31,
-    "delta_vs_first_round": 259,
-    "prices_found": 24,
+    "previous_price": 1016,
+    "price_min": 985,
+    "delta_vs_last_round": -31,
+    "delta_vs_first_round": 228,
+    "prices_found": 30,
     "status": "ok",
     "debug": {
       "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMTJqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTI4agUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
@@ -258,7 +258,7 @@
           "attempt": 1,
           "ok": true,
           "statusCode": 200,
-          "prices_found": 24
+          "prices_found": 30
         }
       ]
     }
@@ -289,9 +289,9 @@
     "departure_date": "2026-09-14",
     "return_date": "2026-09-30",
     "baseline_price": 643,
-    "previous_price": null,
+    "previous_price": 860,
     "price_min": 860,
-    "delta_vs_last_round": null,
+    "delta_vs_last_round": 0,
     "delta_vs_first_round": 217,
     "prices_found": 24,
     "status": "ok",
