@@ -1178,6 +1178,16 @@
           "previous_price": 1143,
           "delta_vs_last_round": null,
           "delta_vs_first_round": null
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": null,
+          "status": "no_prices_found",
+          "prices_found": 0,
+          "baseline_price": 681,
+          "previous_price": null,
+          "delta_vs_last_round": null,
+          "delta_vs_first_round": null
         }
       ]
     },
@@ -2354,6 +2364,16 @@
           "previous_price": 1111,
           "delta_vs_last_round": -162,
           "delta_vs_first_round": 239
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 999,
+          "status": "ok",
+          "prices_found": 22,
+          "baseline_price": 710,
+          "previous_price": 949,
+          "delta_vs_last_round": 50,
+          "delta_vs_first_round": 289
         }
       ]
     },
@@ -3526,6 +3546,16 @@
           "price_min": 1053,
           "status": "ok",
           "prices_found": 22,
+          "baseline_price": 846,
+          "previous_price": 1053,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 207
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 1053,
+          "status": "ok",
+          "prices_found": 20,
           "baseline_price": 846,
           "previous_price": 1053,
           "delta_vs_last_round": 0,
@@ -4706,6 +4736,16 @@
           "previous_price": 1165,
           "delta_vs_last_round": -56,
           "delta_vs_first_round": 189
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 1138,
+          "status": "ok",
+          "prices_found": 22,
+          "baseline_price": 920,
+          "previous_price": 1109,
+          "delta_vs_last_round": 29,
+          "delta_vs_first_round": 218
         }
       ]
     },
@@ -5882,6 +5922,16 @@
           "previous_price": 1203,
           "delta_vs_last_round": -30,
           "delta_vs_first_round": 431
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 1173,
+          "status": "ok",
+          "prices_found": 22,
+          "baseline_price": 742,
+          "previous_price": 1173,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 431
         }
       ]
     },
@@ -7051,6 +7101,16 @@
         },
         {
           "run_started_at": "2026-09-02T07:56:57.977Z",
+          "price_min": 918,
+          "status": "ok",
+          "prices_found": 20,
+          "baseline_price": 681,
+          "previous_price": 918,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 237
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
           "price_min": 918,
           "status": "ok",
           "prices_found": 20,
@@ -8234,6 +8294,16 @@
           "previous_price": 968,
           "delta_vs_last_round": 83,
           "delta_vs_first_round": 425
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 1051,
+          "status": "ok",
+          "prices_found": 22,
+          "baseline_price": 626,
+          "previous_price": 1051,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 425
         }
       ]
     },
@@ -9406,6 +9476,16 @@
           "price_min": 857,
           "status": "ok",
           "prices_found": 20,
+          "baseline_price": 634,
+          "previous_price": 857,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 223
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 857,
+          "status": "ok",
+          "prices_found": 24,
           "baseline_price": 634,
           "previous_price": 857,
           "delta_vs_last_round": 0,
@@ -10586,6 +10666,16 @@
           "previous_price": 870,
           "delta_vs_last_round": 1,
           "delta_vs_first_round": 161
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 871,
+          "status": "ok",
+          "prices_found": 38,
+          "baseline_price": 710,
+          "previous_price": 871,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 161
         }
       ]
     },
@@ -11758,6 +11848,16 @@
           "price_min": 950,
           "status": "ok",
           "prices_found": 22,
+          "baseline_price": 615,
+          "previous_price": 950,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 335
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 950,
+          "status": "ok",
+          "prices_found": 24,
           "baseline_price": 615,
           "previous_price": 950,
           "delta_vs_last_round": 0,
@@ -12938,6 +13038,16 @@
           "previous_price": 1130,
           "delta_vs_last_round": -21,
           "delta_vs_first_round": 247
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 1123,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": 862,
+          "previous_price": 1109,
+          "delta_vs_last_round": 14,
+          "delta_vs_first_round": 261
         }
       ]
     },
@@ -14114,6 +14224,16 @@
           "previous_price": 1000,
           "delta_vs_last_round": 0,
           "delta_vs_first_round": 243
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 1040,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": 757,
+          "previous_price": 1000,
+          "delta_vs_last_round": 40,
+          "delta_vs_first_round": 283
         }
       ]
     },
@@ -15289,6 +15409,16 @@
           "baseline_price": 681,
           "previous_price": 866,
           "delta_vs_last_round": -72,
+          "delta_vs_first_round": 113
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 794,
+          "status": "ok",
+          "prices_found": 20,
+          "baseline_price": 681,
+          "previous_price": 794,
+          "delta_vs_last_round": 0,
           "delta_vs_first_round": 113
         }
       ]
@@ -16466,6 +16596,16 @@
           "previous_price": 968,
           "delta_vs_last_round": 0,
           "delta_vs_first_round": 325
+        },
+        {
+          "run_started_at": "2026-09-02T18:45:00.828Z",
+          "price_min": 980,
+          "status": "ok",
+          "prices_found": 24,
+          "baseline_price": 643,
+          "previous_price": 968,
+          "delta_vs_last_round": 12,
+          "delta_vs_first_round": 337
         }
       ]
     }
@@ -25115,6 +25255,79 @@
             "departure_date": "2026-09-02",
             "return_date": "2026-09-18",
             "price_min": 949
+          }
+        ],
+        "notes": []
+      },
+      "rows_count": 14
+    },
+    {
+      "run_started_at": "2026-09-02T18:45:00.828Z",
+      "summary": {
+        "run_started_at": "2026-09-02T18:45:00.828Z",
+        "watch_id": "chi-rom-sep-2026",
+        "label": "Chicago -> Rome, Paris -> Chicago",
+        "route": "CHI -> ROM, PAR -> CHI",
+        "trip_type": "round_trip",
+        "currency": "USD",
+        "adults": 1,
+        "seat": "economy",
+        "departure_start": "2026-09-01",
+        "departure_end": "2026-09-14",
+        "trip_length_days": 16,
+        "rows_total": 14,
+        "rows_with_price": 13,
+        "min": 794,
+        "median": 999,
+        "mean": 995.9230769230769,
+        "max": 1173,
+        "target_row": {
+          "departure_date": "2026-09-05",
+          "return_date": "2026-09-21",
+          "baseline_price": 742,
+          "previous_price": 1173,
+          "price_min": 1173,
+          "delta_vs_last_round": 0,
+          "delta_vs_first_round": 431,
+          "prices_found": 22,
+          "status": "ok",
+          "debug": {
+            "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMDVqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTIxagUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
+            "attempts": [
+              {
+                "attempt": 1,
+                "ok": true,
+                "statusCode": 200,
+                "prices_found": 22
+              }
+            ]
+          }
+        },
+        "cheapest_5_dates": [
+          {
+            "departure_date": "2026-09-13",
+            "return_date": "2026-09-29",
+            "price_min": 794
+          },
+          {
+            "departure_date": "2026-09-08",
+            "return_date": "2026-09-24",
+            "price_min": 857
+          },
+          {
+            "departure_date": "2026-09-09",
+            "return_date": "2026-09-25",
+            "price_min": 871
+          },
+          {
+            "departure_date": "2026-09-06",
+            "return_date": "2026-09-22",
+            "price_min": 918
+          },
+          {
+            "departure_date": "2026-09-10",
+            "return_date": "2026-09-26",
+            "price_min": 950
           }
         ],
         "notes": []
