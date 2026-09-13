@@ -1,5 +1,5 @@
 {
-  "run_started_at": "2026-09-13T08:21:11.903Z",
+  "run_started_at": "2026-09-13T18:13:29.647Z",
   "rows": [
     {
       "departure_date": "2026-09-01",
@@ -379,7 +379,7 @@
       "departure_date": "2026-09-12",
       "return_date": "2026-09-28",
       "baseline_price": 757,
-      "previous_price": 1163,
+      "previous_price": null,
       "price_min": null,
       "delta_vs_last_round": null,
       "delta_vs_first_round": null,
@@ -435,10 +435,10 @@
       "departure_date": "2026-09-14",
       "return_date": "2026-09-30",
       "baseline_price": 643,
-      "previous_price": 885,
-      "price_min": 890,
-      "delta_vs_last_round": 5,
-      "delta_vs_first_round": 247,
+      "previous_price": 890,
+      "price_min": 911,
+      "delta_vs_last_round": 21,
+      "delta_vs_first_round": 268,
       "prices_found": 20,
       "status": "ok",
       "debug": {
@@ -455,7 +455,7 @@
     }
   ],
   "summary": {
-    "run_started_at": "2026-09-13T08:21:11.903Z",
+    "run_started_at": "2026-09-13T18:13:29.647Z",
     "watch_id": "chi-rom-sep-2026",
     "label": "Chicago -> Rome, Paris -> Chicago",
     "route": "CHI -> ROM, PAR -> CHI",
@@ -469,9 +469,9 @@
     "rows_total": 14,
     "rows_with_price": 2,
     "min": 824,
-    "median": 857,
-    "mean": 857,
-    "max": 890,
+    "median": 867.5,
+    "mean": 867.5,
+    "max": 911,
     "target_row": {
       "departure_date": "2026-09-05",
       "return_date": "2026-09-21",
@@ -515,7 +515,7 @@
       {
         "departure_date": "2026-09-14",
         "return_date": "2026-09-30",
-        "price_min": 890
+        "price_min": 911
       }
     ],
     "notes": []
