@@ -1,5 +1,5 @@
 {
-  "run_started_at": "2026-09-14T08:59:25.267Z",
+  "run_started_at": "2026-09-14T19:51:08.066Z",
   "rows": [
     {
       "departure_date": "2026-09-01",
@@ -413,7 +413,7 @@
       "departure_date": "2026-09-13",
       "return_date": "2026-09-29",
       "baseline_price": 681,
-      "previous_price": 824,
+      "previous_price": null,
       "price_min": null,
       "delta_vs_last_round": null,
       "delta_vs_first_round": null,
@@ -447,12 +447,12 @@
       "departure_date": "2026-09-14",
       "return_date": "2026-09-30",
       "baseline_price": 643,
-      "previous_price": 911,
-      "price_min": 906,
-      "delta_vs_last_round": -5,
-      "delta_vs_first_round": 263,
-      "prices_found": 24,
-      "status": "ok",
+      "previous_price": 906,
+      "price_min": null,
+      "delta_vs_last_round": null,
+      "delta_vs_first_round": null,
+      "prices_found": 0,
+      "status": "no_prices_found",
       "debug": {
         "url": "https://www.google.com/travel/flights/search?tfs=GhoSCjIwMjYtMDktMTRqBRIDQ0hJcgUSA1JPTRoaEgoyMDI2LTA5LTMwagUSA1BBUnIFEgNDSElAAUgBmAEB&hl=en&gl=US&curr=USD",
         "attempts": [
@@ -460,14 +460,26 @@
             "attempt": 1,
             "ok": true,
             "statusCode": 200,
-            "prices_found": 24
+            "prices_found": 0
+          },
+          {
+            "attempt": 2,
+            "ok": true,
+            "statusCode": 200,
+            "prices_found": 0
+          },
+          {
+            "attempt": 3,
+            "ok": true,
+            "statusCode": 200,
+            "prices_found": 0
           }
         ]
       }
     }
   ],
   "summary": {
-    "run_started_at": "2026-09-14T08:59:25.267Z",
+    "run_started_at": "2026-09-14T19:51:08.066Z",
     "watch_id": "chi-rom-sep-2026",
     "label": "Chicago -> Rome, Paris -> Chicago",
     "route": "CHI -> ROM, PAR -> CHI",
@@ -479,11 +491,11 @@
     "departure_end": "2026-09-14",
     "trip_length_days": 16,
     "rows_total": 14,
-    "rows_with_price": 1,
-    "min": 906,
-    "median": 906,
-    "mean": 906,
-    "max": 906,
+    "rows_with_price": 0,
+    "min": null,
+    "median": null,
+    "mean": null,
+    "max": null,
     "target_row": {
       "departure_date": "2026-09-05",
       "return_date": "2026-09-21",
@@ -518,13 +530,9 @@
         ]
       }
     },
-    "cheapest_5_dates": [
-      {
-        "departure_date": "2026-09-14",
-        "return_date": "2026-09-30",
-        "price_min": 906
-      }
-    ],
-    "notes": []
+    "cheapest_5_dates": [],
+    "notes": [
+      "本轮没有抓到任何价格；可能是被 Google 限流了，或页面结构变化，可打开 rows 里 debug.url 的链接人工核对。"
+    ]
   }
 }

@@ -11,5 +11,5 @@ departure_date,return_date,currency,baseline_price,previous_price,price_min,delt
 2026-09-10,2026-09-26,USD,615,,,,,0,no_prices_found
 2026-09-11,2026-09-27,USD,862,,,,,0,no_prices_found
 2026-09-12,2026-09-28,USD,757,,,,,0,no_prices_found
-2026-09-13,2026-09-29,USD,681,824,,,,0,no_prices_found
-2026-09-14,2026-09-30,USD,643,911,906,-5,263,24,ok
+2026-09-13,2026-09-29,USD,681,,,,,0,no_prices_found
+2026-09-14,2026-09-30,USD,643,906,,,,0,no_prices_found
